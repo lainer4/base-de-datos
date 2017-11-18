@@ -26,8 +26,7 @@ $response['conexion'] = $con->initConexion('provbas_agendaJMAN');
       $response['acceso'] = 'rechazado';
     }
   }
-  //$response['msg']= $response['motivo'] + ', Acceso:' + $response['acceso'];
-  //echo $response;
+  
   echo json_encode($response);
 
   $con->cerrarConexion();

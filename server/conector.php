@@ -9,19 +9,17 @@
     public $conexion;
     function buildMe(){
 
-      $ip = getenv("REMOTE_ADDR"); // get the ip number of the user
-      //echo $ip;
-      //printf("Versión de la biblioteca cliente: %d\n", mysqli_get_client_version());
+      $ip = getenv("REMOTE_ADDR"); 
       if ($ip == '127.0.0.1') {
           $this->host = "127.0.0.1";
           $this->user = "agendaNavidad";
           $this->password = "MerryChristmas2017?";
           $this->dbname = "agendaJMAN";
       } else {
-          //$this->host = "mysql1206.opentransfer.com";
-          $this->host = "mysql1206.ixwebhosting.com";
-          $this->user = "provbas_agenda";
-          $this->password = "MaryXmas2017";
+          
+          $this->host = "localhost";
+          $this->user = "master";
+          $this->password = "4444";
           $this->dbname = "provbas_agendaJMAN";
       }
 

@@ -24,8 +24,11 @@ class EventsManager {
               window.location.href = 'index.html';
             }
           },
-          error: function(){
-            alert("error en la comunicación con el servidor");
+          error: function(xhr, status, error) {
+              alert('Falló poBlarCalendario: ' + xhr.responseText + "\nCon el error:\n" + error);
+          },
+          error2: function(){
+            alert("obtenerDataInicial: error en la comunicación con el servidor");
           }
         })
 
@@ -38,7 +41,7 @@ class EventsManager {
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2016-11-01',
+        	defaultDate: '2017-11-01',
         	navLinks: true,
         	editable: true,
         	eventLimit: true,
@@ -74,12 +77,15 @@ class EventsManager {
       var form_data = new FormData();
       form_data.append('titulo', $('#titulo').val())
       form_data.append('start_date', $('#start_date').val())
-      form_data.append('allDay', document.getElementById('allDay').checked)
       if (!document.getElementById('allDay').checked) {
+        form_data.append('allDay', 0);
+
         form_data.append('end_date', $('#end_date').val())
         form_data.append('end_hour', $('#end_hour').val())
         form_data.append('start_hour', $('#start_hour').val())
       }else {
+        form_data.append('allDay', 1);
+
         form_data.append('end_date', "")
         form_data.append('end_hour', "")
         form_data.append('start_hour', "")
@@ -109,16 +115,12 @@ class EventsManager {
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
-
-
-
-
           }else {
             alert(data.msg)
           }
         },
-        error: function(){
-          alert("error en la comunicación con el servidor");
+        error: function(xhr, status, error) {
+            alert('Falló anadirEvento: ' + xhr.responseText + "\nCon el error:\n" + error);
         }
       })
 
@@ -144,7 +146,7 @@ class EventsManager {
           }
         },
         error: function(){
-          alert("error en la comunicación con el servidor");
+          alert("eliminarEvento: error en la comunicación con el servidor");
         }
       })
       $('.delete-btn').find('img').attr('src', "img/trash.png");
@@ -188,9 +190,13 @@ class EventsManager {
               alert(data.msg)
             }
           },
-          error: function(){
-            alert("error en la comunicación con el servidor");
+          error1: function(){
+            alert("actualizarEvento: error en la comunicación con el servidor");
+          },
+          error: function(xhr, status, error) {
+              alert(xhr.responseText + "\nCon el error:\n" + error);
           }
+
         })
     }
 

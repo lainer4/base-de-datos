@@ -28,14 +28,14 @@ class Login {
       data: form_data,
       type: 'POST',
       success: function(php_response){
-        if (php_response.msg == "OK") {
+        if (php_response.acceso == "concedido") {
           window.location.href = 'main.html';
         }else {
-          alert(php_response.msg);
+          alert(php_response.acceso + " " + php_response.motivo);
         }
       },
-      error: function(){
-        alert("error en la comunicación con el servidor");
+      error: function(xhr, status, error) {
+          alert(xhr.responseText + "\nCon el error:\n" + error);
       }
     })
   }
